@@ -1,0 +1,78 @@
+<html>
+<head>
+    <title>Prime Number Finder</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style type="text/css" class="init">
+
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" class="init">
+        $(document).ready(function() {
+            setTimeout(function(){
+
+               var stepVal = $('#step').text();
+               var lengthVal = $('#length').text();
+               var canceledVal = $('#canceled').text();
+               if ((stepVal != lengthVal) && (canceledVal == 'false')) {
+                 window.location.reload(1);
+               }
+            }, 1000);
+        });
+    </script>
+
+
+
+</head>
+<body>
+<h2>Result</h2>
+
+<form method="POST" action="cancel">
+    <div id="canceled" th:text="${primeData.canceledByUser}" style="display: none;">Canceled</div>
+    <button type="submit" class="btn btn-primary">Stop calculation</button>
+</form>
+
+<div class="card border-primary mb-3" style="max-width: 60rem;">
+    <div class="card-header">Progress bar</div>
+    <div class="card-body text-primary">
+        <p class="card-text">
+        <div class="card">
+            <div class="card-body">
+            searched <div id="step" th:text="${primeData.step}">Step</div> numbers from
+            <div id="length" th:text="${primeData.length}">Length</div>
+
+                <progress id="searching" max="100" th:value="${primeData.percent}">
+
+                </progress>
+                <div id="percent" th:text="${primeData.percent}">percent</div>%
+
+
+            </div>
+    </div>
+        </p>
+    </div>
+</div>
+
+<br/>
+<div class="card border-primary mb-3" style="max-width: 60rem;">
+    <div class="card-header">Prime numbers</div>
+    <div class="card-body text-primary">
+        <p class="card-text">
+        <div th:unless= "${#lists.isEmpty(primeData.primeNumbers)}">
+
+            <div class="card">
+                <div class="card-body">
+                    <span th:each="a, iterStat : ${primeData.primeNumbers}" th:text="!${iterStat.last} ? ${a} + ', ': ${a}"></span>
+                </div>
+            </div>
+        </div>
+        </p>
+    </div>
+</div>
+
+
+
+</body>
+</html>

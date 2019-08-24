@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Prime Number Finder</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style type="text/css" class="init">
+
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<h2>Find prime numbers in the range</h2>
+
+
+
+<form method="POST" action="find">
+
+    <div th:unless= "${#lists.isEmpty(validateResult)}">
+
+        <div class="p-3 mb-2 bg-danger text-white" th:each="valid : ${validateResult}">
+            <span th:text="${valid.error}">Error</span>
+        </div>
+
+    </div>
+<br/>
+    <div class="form-group">
+        <label for="rangeFrom">Range from</label>
+        <input type="text" class="form-control" name="rangeFrom" placeholder="Enter range from" th:value="${rangeFrom}">
+    </div>
+    <div class="form-group">
+        <label for="rangeTo">Range to</label>
+        <input type="text" class="form-control" name="rangeTo" placeholder="Enter range to" th:value="${rangeTo}">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+</body>
+</html>
